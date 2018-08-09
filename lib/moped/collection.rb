@@ -124,8 +124,8 @@ module Moped
     # @since 1.3.0
     def aggregate(*pipeline)
       pipeline.flatten!
-      command = { aggregate: name.to_s, pipeline: pipeline }
-      database.session.command(command)["result"]
+      command = { aggregate: name.to_s, pipeline: pipeline, cursor: {} }
+      database.session.command(command)['cursor']['firstBatch']
     end
   end
 end
